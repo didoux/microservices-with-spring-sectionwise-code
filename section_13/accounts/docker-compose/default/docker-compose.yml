@@ -91,7 +91,7 @@ services:
     image: eazybytes/cards:latest
     mem_limit: 700m
     ports:
-      - "9000:9000"
+      - "9002:9002"
     networks:
       - eazybank
     depends_on:
