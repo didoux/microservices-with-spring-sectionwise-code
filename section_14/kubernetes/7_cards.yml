@@ -25,7 +25,7 @@ spec:
             configMapKeyRef:
               name: didoux-configmap
               key: SPRING_PROFILES_ACTIVE
-        - name: SPRING_ZIPKIN_BASEURL
+        - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
           valueFrom: 
             configMapKeyRef:
               name: didoux-configmap
