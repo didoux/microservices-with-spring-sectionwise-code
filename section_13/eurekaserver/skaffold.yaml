@@ -1,0 +1,12 @@
+apiVersion: skaffold/v4beta2
+kind: Config
+metadata:
+  name: eurekaserver
+build:
+  artifacts:
+  - image: didoux/eurekaserver
+    docker:
+      dockerfile: Dockerfile
+manifests:
+  rawYaml:
+  - k8s/4_eurekaserver.yml

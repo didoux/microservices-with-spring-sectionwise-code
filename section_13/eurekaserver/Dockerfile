@@ -1,5 +1,5 @@
 #Start with a base image containing Maven & Java runtime
-FROM maven:3.8.7-eclipse-temurin-17 AS build
+FROM maven:3.9.0-eclipse-temurin-17 AS build
 
 #Information around who maintains the image
 MAINTAINER Dan Idoux
@@ -25,9 +25,9 @@ VOLUME /tmp
 RUN groupadd -r -g 2000 easybank && useradd -m -d /home/easybank -u 2000 -r -g easybank easybank
 
 # Add the application's jar to the container
-COPY --from=build /home/app/target/configserver-0.0.1-SNAPSHOT.jar /usr/local/lib/configserver.jar
+COPY --from=build /home/app/target/eurekaserver-0.0.1-SNAPSHOT.jar /usr/local/lib/eurekaserver.jar
 USER easybank
 EXPOSE 8071
 
 #execute the application
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/usr/local/lib/configserver.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/usr/local/lib/eurekaserver.jar"]
