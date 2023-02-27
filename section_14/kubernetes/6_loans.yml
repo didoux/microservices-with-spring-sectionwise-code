@@ -29,7 +29,7 @@ spec:
           valueFrom: 
             configMapKeyRef:
               name: didoux-configmap
-              key: SPRING_ZIPKIN_BASEURL
+              key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
         - name: SPRING_CONFIG_IMPORT
           valueFrom: 
             configMapKeyRef:
