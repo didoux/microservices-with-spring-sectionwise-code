@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: loans-deployment
+  name: cards-deployment
   labels:
-    app: loans
+    app: cards
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: loans
+      app: cards
   template:
     metadata:
       labels:
-        app: loans
+        app: cards
     spec:
       containers:
-      - name: loans
-        image: didoux/loans:latest
+      - name: cards
+        image: didoux/cards:latest
         ports:
-        - containerPort: 8090
+        - containerPort: 9000
         env:
         - name: SPRING_PROFILES_ACTIVE
           valueFrom: 
@@ -44,12 +44,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: loans-service
+  name: cards-service
 spec:
   selector:
-    app: loans
+    app: cards
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 8090
-      targetPort: 8090
+      port: 9000
+      targetPort: 9000

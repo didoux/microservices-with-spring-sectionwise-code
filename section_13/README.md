@@ -5,6 +5,23 @@
 section12 repository. All these microservices will be leveraged to explore the automatic self-healing, scaling, deployments inside microservices network using **Kubernetes**.
 Below are the key steps that we will be following in this section13 repository,
 
+**Install Skaffold**
+
+```shell
+$ choco uninstall skaffold # Uninstall v1
+$ choco install skaffold   # Install v2
+```
+
+```shell
+$ skaffold version
+v2.1.0
+```
+
+```shell
+
+```
+
+
 **Key steps:**
 - Like we discussed in the course, create a **GCP account and kubernetes cluster**.
 - Like we discussed in the course, connect to the kubernetes cluster using **gcloud** command and issue various commands to it using **kubectl**

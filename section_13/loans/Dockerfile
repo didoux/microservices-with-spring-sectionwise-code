@@ -22,11 +22,11 @@ RUN mvn -f /home/app/pom.xml clean package -DskipTests
 #
 FROM eclipse-temurin:17.0.6_10-jre
 VOLUME /tmp
-RUN groupadd -r -g 2000 easybank && useradd -m -d /home/easybank -u 2000 -r -g easybank easybank
+RUN groupadd -r -g 2000 eazybank && useradd -m -d /home/eazybank -u 2000 -r -g eazybank eazybank
 
 # Add the application's jar to the container
 COPY --from=build /home/app/target/loans-0.0.1-SNAPSHOT.jar /usr/local/lib/loans.jar
-USER easybank
+USER eazybank
 EXPOSE 8071
 
 #execute the application

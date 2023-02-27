@@ -23,12 +23,12 @@ spec:
         - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
           valueFrom: 
             configMapKeyRef:
-              name: didoux-configmap
+              name: eazybank-configmap
               key: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
         - name: SPRING_PROFILES_ACTIVE
           valueFrom: 
             configMapKeyRef:
-              name: didoux-configmap
+              name: eazybank-configmap
               key: SPRING_PROFILES_ACTIVE
 ---
 apiVersion: v1
