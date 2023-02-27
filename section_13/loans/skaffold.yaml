@@ -1,12 +1,12 @@
 apiVersion: skaffold/v4beta2
 kind: Config
 metadata:
-  name: configserver
+  name: loans
 build:
   artifacts:
-  - image: didoux/configserver
+  - image: didoux/loans
     docker:
       dockerfile: Dockerfile
 manifests:
   rawYaml:
-  - k8s/3_configserver.yml
+  - k8s/6_loans.yml
