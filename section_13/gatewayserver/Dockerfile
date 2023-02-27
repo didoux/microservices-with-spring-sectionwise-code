@@ -25,9 +25,9 @@ VOLUME /tmp
 RUN groupadd -r -g 2000 easybank && useradd -m -d /home/easybank -u 2000 -r -g easybank easybank
 
 # Add the application's jar to the container
-COPY --from=build /home/app/target/accounts-0.0.1-SNAPSHOT.jar /usr/local/lib/accounts.jar
+COPY --from=build /home/app/target/gatewayserver-0.0.1-SNAPSHOT.jar /usr/local/lib/gatewayserver.jar
 USER easybank
 EXPOSE 8071
 
 #execute the application
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/usr/local/lib/accounts.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/usr/local/lib/gatewayserver.jar"]

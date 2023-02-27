@@ -27,7 +27,7 @@ RUN groupadd -r -g 2000 easybank && useradd -m -d /home/easybank -u 2000 -r -g e
 # Add the application's jar to the container
 COPY --from=build /home/app/target/eurekaserver-0.0.1-SNAPSHOT.jar /usr/local/lib/eurekaserver.jar
 USER easybank
-EXPOSE 8071
+EXPOSE 8070
 
 #execute the application
 ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/usr/local/lib/eurekaserver.jar"]
