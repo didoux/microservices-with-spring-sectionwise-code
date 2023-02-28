@@ -32,7 +32,13 @@ $ skaffold build -t latest --push
 ```shell
 $ skaffold deploy -t latest
 ```
-
+**Docker Desktop**
+Run this commands to install on Docker Destop
+```shell
+cd microservices-with-spring-sectionwise-code\section_13
+kubectl apply -f kubernetes --namespace=eazybank
+kubectl config set-context --current --namespace=eazybank 
+```
 
 **Key steps:**
 - Like we discussed in the course, create a **GCP account and kubernetes cluster**.
