@@ -6,19 +6,31 @@ section12 repository. All these microservices will be leveraged to explore the a
 Below are the key steps that we will be following in this section13 repository,
 
 **Install Skaffold**
-
+See (https://skaffold.dev/docs/install/) 
 ```shell
 $ choco uninstall skaffold # Uninstall v1
 $ choco install skaffold   # Install v2
 ```
 
+
 ```shell
 $ skaffold version
 v2.1.0
 ```
+**Open a git-bash or Windows Terminal for each account, cards, loans, configserver, eurekaserver, gatewayserver** 
 
 ```shell
+$ skaffold dev -t latest
+```
 
+**To Build and push to dockerhub**
+```shell
+$ skaffold build -t latest --push
+```
+
+**To deploy to docker-desktop k8s**
+```shell
+$ skaffold deploy -t latest
 ```
 
 
