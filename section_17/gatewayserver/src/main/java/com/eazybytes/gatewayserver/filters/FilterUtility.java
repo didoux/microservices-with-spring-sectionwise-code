@@ -1,4 +1,4 @@
-package com.eaztbytes.gatewayserver.filters;
+package com.eazybytes.gatewayserver.filters;
 
 import java.util.List;
 

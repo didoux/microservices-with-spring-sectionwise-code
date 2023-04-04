@@ -1,10 +1,10 @@
-package com.eaztbytes.gatewayserver;
+package com.eazybytes.configserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GatewayserverApplicationTests {
+class ConfigserverApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,8 +1,8 @@
-package com.eaztbytes.gatewayserver;
+package com.eazybytes.gatewayserver;
 
 import java.util.Date;
 
-import com.eaztbytes.gatewayserver.trace.logging.ObservationContextSnapshotLifter;
+import com.eazybytes.gatewayserver.trace.logging.ObservationContextSnapshotLifter;
 import io.micrometer.context.ContextSnapshot;
 import io.micrometer.tracing.Tracer;
 import org.springframework.boot.SpringApplication;

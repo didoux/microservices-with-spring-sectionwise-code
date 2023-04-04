@@ -1,10 +1,10 @@
-package com.eaztbytes.configserver;
+package com.eazybytes.eurekaserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ConfigserverApplicationTests {
+class EurekaserverApplicationTests {
 
 	@Test
 	void contextLoads() {

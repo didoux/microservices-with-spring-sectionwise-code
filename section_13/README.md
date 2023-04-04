@@ -33,7 +33,7 @@ $ skaffold build -t latest --push
 $ skaffold deploy -t latest
 ```
 **Docker Desktop**
-Run this commands to install on Docker Destop
+Run this commands to install on Docker Desktop
 ```shell
 cd microservices-with-spring-sectionwise-code\section_13
 kubectl apply -f kubernetes --namespace=eazybank

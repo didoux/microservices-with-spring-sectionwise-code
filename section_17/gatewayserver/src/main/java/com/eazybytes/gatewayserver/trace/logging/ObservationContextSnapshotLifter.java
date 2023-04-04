@@ -1,4 +1,4 @@
-package com.eaztbytes.gatewayserver.trace.logging;
+package com.eazybytes.gatewayserver.trace.logging;
 
 import java.util.function.BiFunction;
 

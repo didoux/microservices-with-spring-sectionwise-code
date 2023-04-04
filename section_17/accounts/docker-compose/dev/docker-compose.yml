@@ -14,7 +14,7 @@ services:
     image: eazybytes/configserver:latest
     mem_limit: 700m
     ports:
-      - "8071:8071"
+      - "8888:8888"
     networks:
      - eazybank
     depends_on:
@@ -28,7 +28,7 @@ services:
     image: eazybytes/eurekaserver:latest
     mem_limit: 700m
     ports:
-      - "8070:8070"
+      - "8761:8761"
     networks:
      - eazybank
     depends_on:
@@ -41,7 +41,7 @@ services:
         window: 120s
     environment:
       SPRING_PROFILES_ACTIVE: dev
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
       # SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
       MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin:9411/api/v2/spans
       
@@ -63,8 +63,8 @@ services:
         window: 120s
     environment:
       SPRING_PROFILES_ACTIVE: dev
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8761/eureka/
       # SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
       MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin:9411/api/v2/spans
   
@@ -86,8 +86,8 @@ services:
         window: 120s
     environment:
       SPRING_PROFILES_ACTIVE: dev
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8761/eureka/
       # SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
       MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin:9411/api/v2/spans
     
@@ -109,8 +109,8 @@ services:
         window: 120s
     environment:
       SPRING_PROFILES_ACTIVE: dev
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8761/eureka/
       # SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
       MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin:9411/api/v2/spans
   
@@ -135,10 +135,50 @@ services:
         window: 180s
     environment:
       SPRING_PROFILES_ACTIVE: dev
-      SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
-      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8070/eureka/
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8888/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaserver:8751/eureka/
       # SPRING_ZIPKIN_BASEURL: http://zipkin:9411/
       MANAGEMENT_ZIPKIN_TRACING_ENDPOINT: http://zipkin:9411/api/v2/spans
-    
+
+  keycloak:
+    image: ei-al-art-localrep-docker.artifactory.transport.mil:443/global_containers/quay.io/keycloak/keycloak:21.0.2
+    command: start-dev
+    depends_on:
+      - postgres_keycloak_db
+    #          condition: service_healthy
+    environment:
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres_keycloak_db
+      KC_DB_URL_DATABASE: keycloak
+      KC_DB_USERNAME: ${KC_DB_USER}
+      KC_DB_PASSWORD: ${KC_DB_PASSWORD}
+      KC_DB_SCHEMA: public
+      KEYCLOAK_ADMIN: ${KC_ADMIN_USER}
+      KEYCLOAK_ADMIN_PASSWORD: ${KC_ADMIN_PASSWORD}
+    ports:
+      - "8090:8080"
+    networks:
+      - gfm-network
+
+  postgres_keycloak_db:
+    image: ei-al-art-localrep-docker.artifactory.transport.mil:443/global_containers/docker_hub/postgres:15.2-alpine
+    command: postgres -c 'max_connections=200'
+    volumes:
+      - data-volume:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    healthcheck:
+      test: "exit 0"
+    ports:
+      - "5432:5432"
+    networks:
+      - gfm-network
 networks:
-  eazybank:
+  gfm-network:
+    driver: bridge
+
+volumes:
+  data-volume:
+
