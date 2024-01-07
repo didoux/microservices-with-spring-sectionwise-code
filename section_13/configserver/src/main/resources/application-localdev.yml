@@ -1,0 +1,76 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: configserver
+#  security:
+#    user:
+#      name: ${security.name:root}
+#      password: ${security.password:s3cr3t}
+  cloud:
+    compatibility-verifier:
+      enabled: false
+    discovery:
+      enabled: true
+    config:
+      discovery:
+        enabled: true
+      server:
+        git:
+          default-label: main
+#          search-paths: configuration
+          clone-on-start: true
+#          uri: https://gitlab.com/didoux/microservice-config.git
+          uri: https://github.com/didoux/microservices-config.git
+#          uri: ${SPRING_CONFIG_URI}
+          skipSslValidation: true
+          timeout: 4
+#          username: ${GITLAB_USERNAME}
+#          password: ${GITLAB_PASSWORD} #GIT Personal Access Token
+
+logging:
+  level:
+    org.springframework: debug
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+
+endpoints:
+  web:
+    exposure:
+      include: "*"
+
+# Monitoring (Needed for Kubernetes)
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true               
+      show-details: always
+    probes:
+      enabled: true             
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    livenessstate:
+      enabled: true
+    readinessstage:
+      enabled: true
+
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: ${MANAGEMENT_ZIPKIN_TRACING_ENDPOINT:http://localhost:9411/api/v2/spans}
+
+encrypt:
+  key: encrypt-key
